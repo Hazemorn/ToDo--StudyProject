@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Funnel Sans", sans-serif;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background-color: rgba(206, 196, 188, 1);
+}
+
+.logo {
+    max-width: 60px;
+    height: auto;
+}
+
+.greeting-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.greeting-container p {
+    font-size: 64px;
+    line-height: 70.4px;
+    color:rgba(27, 26, 26, 1);
+
+}
+
+main > section:last-child {
+    flex: 1;
+    display: flex;
+}
+
+.wrapper {
+    background-color: rgba(247, 247, 247, 1);
+    min-height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    flex: 1;
+}
+
+/* For test */
+.wrapper section { 
+    border: 0.4px red solid;
+}
+/* For test */
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.stats__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    /* max-width: 80px; */
+}
+
+.stats--done .stats__container {
+    background: #d1f7d6;
+}
+
+.stats--pending .stats__container {
+    background: #e6cf81;
+}
+
+.stats--created .stats__container {
+    background: #b6d2f7;
+}
+
+.date {
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+.stats--done {
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+
+.stats--pending {
+    grid-column: 1/2;
+    grid-row: 3/4;
+}
+
+.stats--created {
+    grid-column: 1/2;
+    grid-row: 4/5;
+}
+
+.sorting {
+   grid-column: 2/3;
+   grid-row: 1/2;
+}
+
+.new-task {
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.tasks {
+    grid-column: 2/3;
+    grid-row: 3/8;
+}
+
+.load {
+    grid-column: 2/3;
+    grid-row: 8/9;
+}
+
+.none {
+    display: none !important;
+}
+
+footer {
+    margin-top: 40px;
+    font-size: 14px;
+    color: gray;
+    text-align: center;
+    margin-bottom: 30px;
+}
