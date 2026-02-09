@@ -128,7 +128,7 @@ main > section:last-child {
     align-items: center;
 }
 
-.new-task-container {
+.new-task-container form {
     display: flex;
     align-items: center;
     gap: 25px; 
@@ -179,6 +179,7 @@ main > section:last-child {
     grid-column: 2/3;
     grid-row: 3/8;
 }
+
 .task-item {
     display: flex;
     justify-content: space-between;
@@ -188,6 +189,12 @@ main > section:last-child {
     background-color: #F0D1A8;
     border-radius: 12px;
 
+}
+
+.task-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .task-item__buttons {
@@ -218,9 +225,19 @@ main > section:last-child {
     border-radius: 12px;
 }
 
+.task-text--done > * {
+    text-decoration: line-through;
+    color: #756f6f;
+}
+
 .none {
     display: none !important;
 }
+
+.btn-action img {
+    pointer-events: none;
+}
+
 
 footer {
     margin-top: 40px;
