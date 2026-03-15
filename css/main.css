@@ -24,20 +24,20 @@ main {
     flex-direction: column;
 }
 
-.header-container {
+.header {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 20px;
+    padding: 5px 20px;
     background-color: rgba(206, 196, 188, 1);
 }
 
 .logo {
-    max-width: 60px;
+    max-width: 45px;
     height: auto;
 }
 
-.greeting-container {
+.greeting {
     padding-top: 20px;
     padding-bottom: 20px;
     display: flex;
@@ -45,9 +45,9 @@ main {
     align-items: center;
 }
 
-.greeting-container p {
-    font-size: 64px;
-    line-height: 70.4px;
+.greeting p {
+    font-size: 40px;
+    line-height: 50.4px;
     color:rgba(27, 26, 26, 1);
 
 }
@@ -62,7 +62,9 @@ main > section:last-child {
     /* min-height: 100%; */
     display: grid;
     grid-template-columns: 1fr 2fr;
+    grid-template-rows: minmax(50px,60px) minmax(40px,50px);  
     flex: 1;
+    align-items: stretch;
 }
 
 /* For test */
@@ -76,27 +78,21 @@ main > section:last-child {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.stats__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     border-radius: 12px;
-    padding: 20px;
+    padding: 10px;
     min-width: 280px;
+    gap: 20px;
 }
 
-.stats--done .stats__container {
+.status--done {
     background: #d1f7d6;
 }
 
-.stats--pending .stats__container {
+.status--pending {
     background: #e6cf81;
 }
 
-.stats--created .stats__container {
+.status--created {
     background: #b6d2f7;
 }
 
@@ -105,22 +101,12 @@ main > section:last-child {
     grid-row: 1/3;
 }
 
-.stats--done {
+.status__container {
     grid-column: 1/2;
-    grid-row: 3/4;
+    grid-row: 3/8;
 }
 
-.stats--pending {
-    grid-column: 1/2;
-    grid-row: 4/5;
-}
-
-.stats--created {
-    grid-column: 1/2;
-    grid-row: 5/6;
-}
-
-.new-task {
+.new_task {
     grid-column: 2/3;
     grid-row: 1/2;
     display: flex;
@@ -128,26 +114,26 @@ main > section:last-child {
     align-items: center;
 }
 
-.new-task-container form {
+.new_task__container form {
     display: flex;
     align-items: center;
     gap: 25px; 
 }
 
-.new-task-container input {
+.new_task__container input {
     padding: 10px 20px;
     border-radius: 12px;
     width: 250px;
 }
 
-.new-task-container button {
+.new_task__container button {
     padding: 10px 20px;
     border-radius: 12px;
     font-size: 20px;
     background-color: #99e1aa;
 }
 
-.priority-container select {
+.priority__container select {
     padding: 5px 10px;
     border-radius: 12px;
 }
@@ -156,21 +142,22 @@ main > section:last-child {
 .sorting {
    grid-column: 2/3;
    grid-row: 2/3;
+   grid-template-rows: minmax(30px, 35px); 
 }
 
-.sorting-container {
+.sorting__container {
     display:flex;
     justify-content: space-between;
     padding-left: 60px;
     padding-right: 60px;
 }
 
-.sorting-container select {
+.sorting__container select {
     padding: 5px 10px;
     border-radius: 12px;
 }
 
-.sorting-find-field {
+.sorting__find_field {
     display: flex;
     gap: 5px;
 }
@@ -180,7 +167,7 @@ main > section:last-child {
     grid-row: 3/8;
 }
 
-.task-item {
+.task__item {
     display: flex;
     justify-content: space-between;
     padding: 5px 20px;
@@ -191,19 +178,19 @@ main > section:last-child {
 
 }
 
-.task-text {
+.task__text {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.task-item__buttons {
+.task__item__buttons {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
 
-.empty-list {
+.empty_list {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -220,12 +207,12 @@ main > section:last-child {
     align-items: center;
 }
 
-.load-container > button{
+.load__container > button{
     padding: 5px 60px;
     border-radius: 12px;
 }
 
-.task-text--done > * {
+.task__text--done > * {
     text-decoration: line-through;
     color: #756f6f;
 }
@@ -240,7 +227,7 @@ main > section:last-child {
 
 
 footer {
-    margin-top: 40px;
+    margin-top: 25px;
     font-size: 14px;
     color: gray;
     text-align: center;
