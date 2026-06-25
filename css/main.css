@@ -80,8 +80,14 @@ main > section:last-child {
     align-items: center;
     border-radius: 12px;
     padding: 10px;
+    margin: 0 20px;
     min-width: 280px;
-    gap: 20px;
+    gap: 30px;
+    border: 0.4px #756f6f solid;
+}
+
+.stats p {
+   font-size: 30px;
 }
 
 .status--done {
@@ -133,6 +139,18 @@ main > section:last-child {
     background-color: #99e1aa;
 }
 
+.error-input {
+    border: 2px solid #ff4d4d !important;
+    background-color: #ffe6e6;
+}
+.error-message {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    display: block;
+}
+
 .priority__container select {
     padding: 5px 10px;
     border-radius: 12px;
@@ -155,11 +173,18 @@ main > section:last-child {
 .sorting__container select {
     padding: 5px 10px;
     border-radius: 12px;
+    width: 200px;
 }
 
 .sorting__find_field {
     display: flex;
     gap: 5px;
+}
+
+.sorting__find_field input {
+    border-radius: 12px;
+    width: 200px;
+    padding: 0 20px;
 }
 
 .tasks {
@@ -171,11 +196,11 @@ main > section:last-child {
     display: flex;
     justify-content: space-between;
     padding: 5px 20px;
-    margin: 5px;
+    margin: 5px 10px;
     border: 0.4px #F0D1A8 solid;
     background-color: #F0D1A8;
     border-radius: 12px;
-
+    max-width: 450px;
 }
 
 .task__text {
@@ -188,15 +213,6 @@ main > section:last-child {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-}
-
-.empty_list {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 1em;
-    padding-bottom: 1em;
 }
 
 .load {

@@ -22,6 +22,7 @@ formFindTask.addEventListener('submit', findByTitle);
 dateToday.innerHTML = createDateFrame();
 loadFromLS();
 checkEmptyList();
+
 function createDateFrame () {
     const d = new Date();
     const year = d.getFullYear();
@@ -34,6 +35,14 @@ function createDateFrame () {
 
 function addTask (event) {
     event.preventDefault();
+    clearErrors();
+    let isValid = true;
+    isValid = validationCheck(isValid, taskTitle);
+    isValid = validationCheck(isValid, taskDetails);
+
+   
+    if (!isValid) return;
+
     const textTitle = taskTitle.value;
     const textDetails = taskDetails.value;
     const typePriority = priorityAdd.value;
@@ -226,4 +235,34 @@ function renderTasksStatus () {
 
 //------------------------------
 //pagination by 5 tasks
-//validation
+
+//validations
+function validationCheck (isValid, inputElement) {
+    const maxLenght = inputElement.id === 'taskTitle' ? 25 : 45;
+    const fieldName = inputElement.id === 'taskTitle' ? 'Title' : 'Task details';
+    if (inputElement.value.trim() === '') {
+        showError(inputElement, `${fieldName} field is required`);
+        isValid = false;
+    } else if (inputElement.value.length > maxLenght) {
+        showError(inputElement, `Max ${maxLenght} characters allowed!`);
+        isValid = false;
+    }
+   return isValid;
+}
+
+function showError(inputElement, message) {
+    inputElement.classList.add('error-input');
+    inputElement.value = ''; 
+    inputElement.placeholder = message;
+}
+
+function clearErrors() {
+    taskTitle.classList.remove('error-input');
+    taskTitle.placeholder = "Enter task title";
+
+    taskDetails.classList.remove('error-input');
+    taskDetails.placeholder = "Enter task details";
+    priorityAdd.classList.remove('error-input');
+    priorityAdd.options[0].text = 'Choose priority';
+}
+//validations
