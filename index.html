@@ -19,7 +19,7 @@
     <main>
         <section>
             <div class="greeting">
-                <p>Hello, User, Start planning today</p>
+                <p>Hello, Start planning today</p>
             </div>
         </section>
 
@@ -38,8 +38,8 @@
                 <section class="new_task">
                     <div class="new_task__container">
                         <form id="form">
-                            <input type="text" id='taskTitle' placeholder="Enter task title" maxlength="25">
-                            <input type="text" id='taskDetails' placeholder="Enter task details" maxlength="45">
+                            <input type="text" id='taskTitle' placeholder="Enter task title*" maxlength=50">
+                            <input type="text" id='taskDetails' placeholder="Enter task details*" maxlength="120">
                             <div class="priority__container">
                                 <select name="priority--add" id="priority--add">
                                     <option value="Low">Choose priority</option>
@@ -107,7 +107,8 @@
 
                 <section class="load">
                     <div class="load__container">
-                        <button>Load more</button>
+                        <div id="pagination" class="pagination__container"></div>
+                        <!-- <button>Load more</button> -->
                     </div>
                 </section>
             </div>

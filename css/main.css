@@ -200,7 +200,11 @@ main > section:last-child {
     border: 0.4px #F0D1A8 solid;
     background-color: #F0D1A8;
     border-radius: 12px;
-    max-width: 450px;
+}
+#emptyList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .task__text {
@@ -222,7 +226,18 @@ main > section:last-child {
     justify-content: center;
     align-items: center;
 }
+.pagination-btn {
+    padding: 5px;
+    margin: 3px;
+    border-radius: 5px;
+}
 
+.pagination-btn--active {
+    background-color: #F0D1A8;
+    padding: 5px;
+    margin: 3px;
+    border-radius: 5px;
+}
 .load__container > button{
     padding: 5px 60px;
     border-radius: 12px;

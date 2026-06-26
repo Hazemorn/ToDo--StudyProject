@@ -9,10 +9,14 @@ const emptyList = document.querySelector('#emptyList');
 const countStatus = document.querySelector('.status__container');
 const findTask = document.querySelector('[name="findByTitle"]');
 const formFindTask = document.querySelector('#form-find');
+const paginationElement = document.querySelector('#pagination');
 
 
 let allTasks = [];
 let statusTasks = [0, 0, 0];// completed, pending, created
+
+let currentPage = 1;
+const itemsPerPage = 5;
 
 form.addEventListener('submit', addTask);
 tasksList.addEventListener('click', doneTask);
@@ -39,8 +43,6 @@ function addTask (event) {
     let isValid = true;
     isValid = validationCheck(isValid, taskTitle);
     isValid = validationCheck(isValid, taskDetails);
-
-   
     if (!isValid) return;
 
     const textTitle = taskTitle.value;
@@ -57,15 +59,17 @@ function addTask (event) {
         isDone: false,
         data: dateNow
     }
+
     allTasks.push(newTask);
     saveToLS();
-    //create an object
-    renderTask (newTask);
+    currentPage = 1;
+    displayTasksPerPage(allTasks);
+    //create an object end
     //reset all input fields
     taskTitle.value = '';
     taskDetails.value = '';
     priorityAdd.value = 'Low';
-     //reset all input fields
+     //reset all input fields end
     
     statusTasks[1] = statusTasks[1] + 1;
     statusTasks[2] = statusTasks[2] + 1;
@@ -87,7 +91,7 @@ function doneTask (event) {
     const parentNode = parentTaskText.closest('.task__item');
     const index = allTasks.findIndex(task => task.id === Number(parentNode.id));
     allTasks[index].isDone = !allTasks[index].isDone;
-    //change status in the array
+    //change status in the array end
     statusTasks[0] = allTasks[index].isDone ? statusTasks[0] + 1 : statusTasks[0] - 1 ;
     statusTasks[1] = allTasks[index].isDone ? statusTasks[1] - 1 : statusTasks[1] + 1 ;
     renderTasksStatus();
@@ -104,7 +108,7 @@ function deleteTask (event) {
     //delete in the array
     const index = allTasks.findIndex(task => task.id === Number(parentNode.id));
     allTasks.splice(index, 1);
-    //delete in the array
+    //delete in the array end
     checkEmptyList();
     statusTasks.forEach((value, index, array) => {
         array[index] = value - 1; 
@@ -112,11 +116,11 @@ function deleteTask (event) {
             array[index] = 0;
         } 
     });
-    renderTasksStatus();
+    displayTasksPerPage(allTasks);
     countStatus.innerHTML = renderTasksStatus();
     //remove item in local storage
     saveToLS();
-    //remove item in local storage
+    //remove item in local storage end
 }
 
 
@@ -149,10 +153,10 @@ function loadFromLS () {
         element.isDone ? statusTasks[0] + 1 : statusTasks[1] + 1;
         renderTask (element);
     });
-    renderTasksStatus();
+    displayTasksPerPage(allTasks);
     countStatus.innerHTML = renderTasksStatus();
 }
-//local storage
+//local storage end
 
 function renderTask (task) {
     const cssClass = task.isDone ? 'task__text--done' : 'task__text';
@@ -175,25 +179,28 @@ function renderTask (task) {
                                 </div>
                             </li>`;
 
-    tasksList.insertAdjacentHTML('afterbegin', taskHTML);
-    //create HTML frame
+    tasksList.insertAdjacentHTML('beforeend', taskHTML);
+    //create HTML frame end
 
 }
 //sorting
 function sortItems () {
+    currentPage = 1;
     tasksList.innerHTML = ''; 
     const filteringPriority = allTasks.filter(item => {
-        return priorityFind.value === 'By priority' || item.priority === priorityFind.value}).map(renderTask)
+        return priorityFind.value === 'By priority' || item.priority === priorityFind.value})
+    displayTasksPerPage(filteringPriority);
     checkNoResult (filteringPriority);
 }  
-//sorting
+//sorting end
 
 //findByTitle
 function findByTitle (event) {
     event.preventDefault();
     tasksList.innerHTML = ''; 
     const filteringByTitle = allTasks.filter(item => {
-        return item.title.trim().toLowerCase() === findTask.value.trim().toLowerCase()}).map(renderTask)
+        return item.title.trim().toLowerCase() === findTask.value.trim().toLowerCase()})
+    displayTasksPerPage(filteringByTitle)
     checkNoResult (filteringByTitle);
 }
 
@@ -208,7 +215,7 @@ function checkNoResult (filteredArray) {
         }
 }
 
-//findByTitle
+//findByTitle end
 
 //create/pending/done counter
 function renderTasksStatus () {
@@ -231,14 +238,58 @@ function renderTasksStatus () {
         </div>
     `
 }
-//create/pending/done counter
+//create/pending/done counter end
 
 //------------------------------
 //pagination by 5 tasks
+function displayTasksPerPage (tasksArray) {
+    tasksList.innerHTML='';
+
+    if (allTasks.length < 6) {
+        tasksArray.forEach((item) => renderTask(item));
+        paginationElement.innerHTML ='';
+    } else {
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+    
+        const paginationList = tasksArray.slice(start, end);
+
+        paginationList.forEach((item) => renderTask(item));
+        paginationControl(tasksArray);
+    }
+}
+
+function paginationControl (tasksArray) {
+    paginationElement.innerHTML ='';
+    const pageCount = Math.ceil(tasksArray.length / itemsPerPage);
+    if (currentPage > pageCount && pageCount > 0) {
+        currentPage = pageCount;
+        displayTasksPerPage(tasksArray);
+        return;
+    }
+
+    for (let i = 1; i <= pageCount; i++) {
+        const buttonPage = document.createElement('button');
+        buttonPage.innerHTML = i;
+        if (currentPage === i ) {
+            buttonPage.classList.add('pagination-btn--active');
+        } else {
+            buttonPage.classList.add('pagination-btn');
+        }
+        buttonPage.addEventListener('click', () => {
+            currentPage = i;
+            displayTasksPerPage(tasksArray);
+        });
+        paginationElement.appendChild(buttonPage);
+
+    }
+
+}
+//pagination by 5 tasks end
 
 //validations
 function validationCheck (isValid, inputElement) {
-    const maxLenght = inputElement.id === 'taskTitle' ? 25 : 45;
+    const maxLenght = inputElement.id === 'taskTitle' ? 50 : 120;
     const fieldName = inputElement.id === 'taskTitle' ? 'Title' : 'Task details';
     if (inputElement.value.trim() === '') {
         showError(inputElement, `${fieldName} field is required`);
@@ -265,4 +316,4 @@ function clearErrors() {
     priorityAdd.classList.remove('error-input');
     priorityAdd.options[0].text = 'Choose priority';
 }
-//validations
+//validations end
